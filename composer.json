@@ -5,9 +5,9 @@
     "keywords": ["yii2","extension","ueditor"],
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/yongtiger/yii2-ueditor/issues",
+        "issues": "https://github.com/yongtiger/ueditor/issues",
         "forum": "http://www.yiiframework.com/forum/",
-        "source": "https://github.com/yongtiger/yii2-ueditor"
+        "source": "https://github.com/yongtiger/ueditor"
     },
     "authors": [
         {

@@ -1,9 +1,9 @@
 # Yii2-ueditor v0.0.0 (initial commit)
 
-[![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-ueditor/v/stable)](https://packagist.org/packages/yongtiger/yii2-ueditor)
-[![Total Downloads](https://poser.pugx.org/yongtiger/yii2-ueditor/downloads)](https://packagist.org/packages/yongtiger/yii2-ueditor) 
-[![Latest Unstable Version](https://poser.pugx.org/yongtiger/yii2-ueditor/v/unstable)](https://packagist.org/packages/yongtiger/yii2-ueditor)
-[![License](https://poser.pugx.org/yongtiger/yii2-ueditor/license)](https://packagist.org/packages/yongtiger/yii2-ueditor)
+[![Latest Stable Version](https://poser.pugx.org/yongtiger/ueditor/v/stable)](https://packagist.org/packages/yongtiger/ueditor)
+[![Total Downloads](https://poser.pugx.org/yongtiger/ueditor/downloads)](https://packagist.org/packages/yongtiger/ueditor) 
+[![Latest Unstable Version](https://poser.pugx.org/yongtiger/ueditor/v/unstable)](https://packagist.org/packages/yongtiger/ueditor)
+[![License](https://poser.pugx.org/yongtiger/ueditor/license)](https://packagist.org/packages/yongtiger/ueditor)
 
 
 ## FEATURES
@@ -28,4 +28,4 @@
 
 
 ## LICENSE 
-**yii2-ueditor** is released under the MIT license, see [LICENSE](https://opensource.org/licenses/MIT) file for details.
+**ueditor** is released under the MIT license, see [LICENSE](https://opensource.org/licenses/MIT) file for details.
