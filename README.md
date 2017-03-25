@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.0.0 (initial commit)
+# Yii2-ueditor v0.0.2 (FIX# UEditor_snapscreen)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/ueditor/v/stable)](https://packagist.org/packages/yongtiger/ueditor)
 [![Total Downloads](https://poser.pugx.org/yongtiger/ueditor/downloads)](https://packagist.org/packages/yongtiger/ueditor) 

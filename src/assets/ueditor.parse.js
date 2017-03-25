@@ -12,7 +12,7 @@
 
     ///[Syntaxhighlighter]语法高亮设置,一共有8种主题可选：Default,Django,Eclipse,Emacs,FadeToGrey,MDUltra,Midnight,RDark
     UE.sh_config = {
-        sh_js : "shCore.js",
+        sh_js : "shCore.min.js",
         sh_theme : "Default"
     };
 

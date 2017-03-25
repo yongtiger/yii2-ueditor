@@ -23,8 +23,8 @@ class UEditorAsset extends AssetBundle
 {
     public $js = [
         'ueditor.config.js',
-        'ueditor.all.min.js',
-        // 'ueditor.all.js',
+        // 'ueditor.all.min.js',	///?????ueditor.all.min.js暂时不能用！需要做相应修改后压缩
+        'ueditor.all.js',
     ];
    
     public function init()

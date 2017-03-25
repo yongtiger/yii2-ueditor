@@ -33,6 +33,7 @@ class UEditor extends InputWidget
     ///[yii2-brainblog_v0.9.0_f0.8.0_UEditor_SyntaxHighlighter]
     ///[UEditor:自定义请求参数]（注意：编辑器内容首行不能有pre！否则失效）@see http://fex.baidu.com/ueditor/#dev-serverparam
     public $serverparam;
+    
     ///[UEditor_Event_insertimage_insertfile_simpleuploadge]
     public $uploadInputNames = [
         'image' => 'insertimage[]',
@@ -129,6 +130,8 @@ class UEditor extends InputWidget
                         ue.container.appendChild(input);
                     }
                 });
+                ///[http://www.brainbook.cc]
+
                 ///检测body中是否含有附件项，如果没有则删除
                 ue.addListener('contentchange',function(){
                     var uploadimages = document.getElementsByName('<?= $this->uploadInputNames['image'] ?>');
@@ -139,8 +142,11 @@ class UEditor extends InputWidget
                             var is_exist = false;
                             ///遍历ue.document中所有img标签，如果所有img标签的src都不包含uploadimages[i].value的src，则删除该uploadimages[i]
                             for(var j=0;j<imgs.length;j++){
-                                $src1 = imgs[j].src;
-                                $src2 = JSON.parse(uploadimages[i].value).src;
+                                ///[decodeURI is needed] because:
+                                ///imgs[j].src = `http://localhost/%5Bgit%5D/1_article/frontend/web/index.php?r=article%2Fpost%2Fupdate&id=67'
+                                ///JSON.parse(uploadimages[i].value).src = `/[git]/1_article/frontend/web/upload/scrawl/20170325/1490402665412466.png`
+                                $src1 = decodeURI(imgs[j].src); 
+                                $src2 = decodeURI(JSON.parse(uploadimages[i].value).src);   
                                 if($src1.indexOf($src2)>=0){
                                     is_exist = true;
                                     break;
@@ -159,8 +165,9 @@ class UEditor extends InputWidget
                             var is_exist = false;
                             ///遍历ue.document中所有a标签，如果所有a标签的href都不包含uploadfiles[i].value的url，则删除该uploadfiles[i]
                             for(var j=0;j<files.length;j++){
-                                $url1 = files[j].href;
-                                $url2 = JSON.parse(uploadfiles[i].value).url;
+                                ///[decodeURI is needed]
+                                $url1 = decodeURI(files[j].href);
+                                $url2 = decodeURI(JSON.parse(uploadfiles[i].value).url);
                                 if($url1.indexOf($url2)>=0){
                                     is_exist = true;
                                     break;
@@ -175,19 +182,15 @@ class UEditor extends InputWidget
                 ///[http://www.brainbook.cc]
 
                 ///[yii2-brainblog_v0.9.1_f0.9.0_post_attachment_AttachableBehavior]
-                <?php
-                foreach ($this->model->attachValues as $key => $value){
-                    foreach ($value as $uploadJson){
-                ?>
+                <?php foreach ($this->model->attachValues as $key => $value) : ?>
+                    <?php foreach ($value as $uploadJson) : ?>
                         var input = document.createElement('input');
                         input.name = 'Content[attachValues][<?= $key ?>][]';
                         input.type = 'hidden';
                         input.value = '<?= $uploadJson ?>';
                         ue.container.appendChild(input);
-                <?php
-                    }
-                }
-                ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
                 ///[http://www.brainbook.cc]
 
             });

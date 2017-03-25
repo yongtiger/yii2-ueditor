@@ -11171,7 +11171,7 @@ UE.commands['insertimage'] = {
 
                     ///[UEditor_Event]
                     ///(ci.title && ci.title != "" ? ' title="' + ci.title + '"' : '') +
-                    (ci.title && ci.title != "" ? ' title="文件名:' + ci.title+', 文件类型:'+ci.type+', 文件大小:'+ci.size + '(字节)"' : '') +
+                    (ci.title && ci.title != "" ? ' title="title:' + ci.title+', type:'+ci.type+', size:'+ci.size + '(bytes)"' : '') +
 
                     (ci.border && ci.border != "0" ? ' border="' + ci.border + '"' : '') +
                     (ci.alt && ci.alt != "" ? ' alt="' + ci.alt + '"' : '') +
@@ -11193,7 +11193,7 @@ UE.commands['insertimage'] = {
 
                         ///[UEditor_Event]
                         ///(ci.title ? ' title="' + ci.title + '"' : '') + 
-                        (ci.title && ci.title != "" ? ' title="文件名:' + ci.title+', 文件类型:'+ci.type+', 文件大小:'+ci.size + '(字节)"' : '') +
+                        (ci.title && ci.title != "" ? ' title="title:' + ci.title+', type:'+ci.type+', size:'+ci.size + '(bytes)"' : '') +
                         (ci.alt && ci.alt != "" ? ' alt="' + ci.alt + '"' : '') +
 
                         ' /></p>';
@@ -23262,7 +23262,7 @@ UE.plugins['catchremoteimage'] = function () {
                                     "_src": newSrc,
 
                                     ///[UEditor_Event]
-                                    "title": '文件名:'+cj.title+', 类型:'+cj.type+', 文件大小:'+cj.size,
+                                    "title": 'title:'+cj.title+', type:'+cj.type+', size:'+cj.size,
                                     "alt": cj.original
 
                                 });
@@ -23374,6 +23374,12 @@ UE.plugin.register('snapscreen', function (){
                                     src: opt.snapscreenUrlPrefix + rs.url,
                                     _src: opt.snapscreenUrlPrefix + rs.url,
                                     alt: rs.title || '',
+                                    
+                                    ///[v0.0.2 (FIX# UEditor_snapscreen)]
+                                    title: rs.title,
+                                    type: rs.type,
+                                    size: rs.size,
+
                                     floatStyle: opt.snapscreenImgAlign
                                 });
                             } else {
@@ -23791,7 +23797,7 @@ UE.plugin.register('autoupload', function (){
 
                     ///[UEditor_Event]
                     ///loader.setAttribute('title', data.title || '');
-                    loader.setAttribute('title', '文件名:' + data.title + ', 类型:' + data.type + ', 文件大小:' + data.size + '(字节)' || '');
+                    loader.setAttribute('title', 'title:' + data.title + ', type:' + data.type + ', size:' + data.size + '(bytes)' || '');
 
                     loader.setAttribute('alt', data.original || '');
                     loader.removeAttribute('id');
@@ -24568,7 +24574,7 @@ UE.plugin.register('simpleupload', function (){
 
                             ///[UEditor_Event]
                             ///loader.setAttribute('title', json.title || '');
-                            loader.setAttribute('title', '文件名:' + json.title + ', 类型:' + json.type + ', 文件大小:' + json.size + '(字节)' || '');
+                            loader.setAttribute('title', 'title:' + json.title + ', type:' + json.type + ', size:' + json.size + '(bytes)' || '');
 
                             loader.setAttribute('alt', json.original || '');
                             loader.removeAttribute('id');
@@ -24853,7 +24859,7 @@ UE.plugin.register('insertfile', function (){
 
                             ///[UEditor_Event]
                             ///'<a style="font-size:12px; color:#0066cc;" href="' + item.url +'" title="' + title + '">' + title + '</a>' +
-                            '<a style="font-size:12px; color:#0066cc;" href="' + item.url +'" title="文件名:' + title + ', 类型:' + item.type + ', 文件大小:' + item.size + '(字节)">' + title + '</a>' +
+                            '<a style="font-size:12px; color:#0066cc;" href="' + item.url +'" title="title:' + title + ', type:' + item.type + ', size:' + item.size + '(bytes)">' + title + '</a>' +
 
                             '</p>';
                     }

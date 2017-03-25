@@ -17,12 +17,12 @@ use yii\web\AssetBundle;
 class UeditorParseAsset extends AssetBundle
 {
     public $js = [
+    	'ueditor.parse.js',	///for test
         'ueditor.parse.min.js',
     ];
    
     public function init()
     {
-        $this->sourcePath = '@vendor/yongtiger/yii2-ueditor/src/assets';
+        $this->sourcePath = '@yongtiger/ueditor/assets';
     }
 }
-///[http://www.brainbook.cc]
