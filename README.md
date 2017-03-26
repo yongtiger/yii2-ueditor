@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.0.2 (FIX# UEditor_snapscreen)
+# Yii2-ueditor v0.0.3 (ADD# UEditor_insertvideo)
 
 Forks from [BigKuCha/yii2-ueditor-widget](https://github.com/BigKuCha/yii2-ueditor-widget) version 1.21.
 

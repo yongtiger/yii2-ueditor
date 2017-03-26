@@ -38,6 +38,7 @@ class UEditor extends InputWidget
     public $uploadInputNames = [
         'image' => 'insertimage[]',
         'file' => 'insertfile[]',
+        'video' => 'insertvideo[]',///[v0.0.3 (ADD# UEditor_insertvideo)]
     ];
 
     //默认配置
@@ -120,6 +121,20 @@ class UEditor extends InputWidget
 
                     }
                 });
+                ///[v0.0.3 (ADD# UEditor_insertvideo)]
+                ue.addListener('afterinsertvideo',function(type, arguments){
+                    if(type == 'afterinsertvideo'){
+                        ///arguments: 上传视频的对象数组（如果上传多个视频，可遍历该值）
+                        for(var i=0;i<arguments.length;i++){
+                            var input = document.createElement('input');
+                            input.name = '<?= $this->uploadInputNames['video'] ?>';
+                            input.type = 'hidden';
+                            input.value = '{"url":"'+arguments[i].url+'","title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}';
+                            ue.container.appendChild(input);
+                        }
+
+                    }
+                });
                 ue.addListener('aftersimpleupload afterautouploadimage afterwordimage aftercatchremote',function(type, argument){
                     if(type == 'aftersimpleupload' || type == 'afterautouploadimage' || type == 'afterwordimage' || type == 'aftercatchremote'){
                         ///argument: 上传图片的img对象，另外size为上传图片的文件大小
@@ -175,6 +190,28 @@ class UEditor extends InputWidget
                             }
                             if(!is_exist){
                                 ue.container.removeChild(uploadfiles[i]);
+                            }
+                        }
+                    }
+                    ///[v0.0.3 (ADD# UEditor_insertvideo)]
+                    var uploadvideos = document.getElementsByName('<?= $this->uploadInputNames['video'] ?>');
+                    if(uploadvideos.length>0){
+                        var videos = ue.document.getElementsByTagName('img');
+                        ///遍历uploadvideos
+                        for(var i=0;i<uploadvideos.length;i++){
+                            var is_exist = false;
+                            ///遍历ue.document中所有img标签，如果所有img标签的_url都不包含uploadvideos[i].value的url，则删除该uploadvideos[i]
+                            for(var j=0;j<videos.length;j++){
+                                ///[decodeURI is needed]
+                                $url1 = decodeURI(videos[j].getAttribute('_url'));
+                                $url2 = decodeURI(JSON.parse(uploadvideos[i].value).url);
+                                if($url1.indexOf($url2)>=0){
+                                    is_exist = true;
+                                    break;
+                                }
+                            }
+                            if(!is_exist){
+                                ue.container.removeChild(uploadvideos[i]);
                             }
                         }
                     }

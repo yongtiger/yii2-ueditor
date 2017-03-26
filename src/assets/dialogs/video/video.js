@@ -295,7 +295,14 @@
                 url: uploadDir + file.url,
                 width:width,
                 height:height,
-                align:align
+                align:align,
+
+                ///[v0.0.3 (ADD# UEditor_insertvideo)]
+                original: file.original,
+                title: file.title,   
+                type: file.type,
+                size: file.size
+
             });
         }
 
@@ -737,7 +744,12 @@
                         uploadVideoList.push({
                             'url': json.url,
                             'type': json.type,
-                            'original':json.original
+                            'original':json.original,
+
+                            ///[v0.0.3 (ADD# UEditor_insertvideo)]
+                            'size': json.size,
+                            'title': json.title
+
                         });
                         $file.append('<span class="success"></span>');
                     } else {

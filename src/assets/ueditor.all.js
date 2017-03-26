@@ -17772,6 +17772,15 @@ UE.plugins['video'] = function (){
     me.commands["insertvideo"] = {
         execCommand: function (cmd, videoObjs, type){
             videoObjs = utils.isArray(videoObjs)?videoObjs:[videoObjs];
+
+            ///[v0.0.3 (ADD# UEditor_insertvideo)]
+            if (!videoObjs.length) {
+                return;
+            }
+            if(this.fireEvent('beforeinsertvideo', videoObjs) === true){
+                return;
+            }
+
             var html = [],id = 'tmpVedio', cl;
             for(var i=0,vi,len = videoObjs.length;i<len;i++){
                 vi = videoObjs[i];
@@ -17786,6 +17795,7 @@ UE.plugins['video'] = function (){
                 rng.selectNode(img).select();
                 me.execCommand('imagefloat',videoObjs[i].align)
             }
+            this.fireEvent('afterinsertvideo', videoObjs);  ///[v0.0.3 (ADD# UEditor_insertvideo)]
         },
         queryCommandState : function(){
             var img = me.selection.getRange().getClosedNode(),
