@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.0.3 (ADD# UEditor_insertvideo)
+# Yii2-ueditor v0.0.4 (FIX# video js data-setup)
 
 Forks from [BigKuCha/yii2-ueditor-widget](https://github.com/BigKuCha/yii2-ueditor-widget) version 1.21.
 

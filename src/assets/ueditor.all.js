@@ -17674,8 +17674,9 @@ UE.plugins['video'] = function (){
             case 'video':
                 var ext = url.substr(url.lastIndexOf('.') + 1);
                 if(ext == 'ogv') ext = 'ogg';
+                ///[v0.0.4 (FIX# video js data-setup)]
                 str = '<video' + (id ? ' id="' + id + '"' : '') + ' class="' + classname + ' video-js" ' + (align ? ' style="float:' + align + '"': '') +
-                    ' controls preload="none" width="' + width + '" height="' + height + '" src="' + url + '" data-setup="{}">' +
+                    ' controls preload="none" width="' + width + '" height="' + height + '" src="' + url + '">' +
                     '<source src="' + url + '" type="video/' + ext + '" /></video>';
                 break;
         }

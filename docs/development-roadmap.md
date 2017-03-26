@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.4 (FIX# video js data-setup)
+
+* `\assets\ueditor.all.js`
+
+
 ## v0.0.3 (ADD# UEditor_insertvideo)
 
 
