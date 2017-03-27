@@ -10,7 +10,7 @@
  * @license     http://opensource.org/licenses/MIT
  */
 
-namespace yongtiger\ueditor;
+namespace yongtiger\ueditor\widgets;
 
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -19,11 +19,12 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\InputWidget;
+use yongtiger\ueditor\UEditorAsset;
 
 /**
- * Class UEditor
+ * UEditor Input Widget
  *
- * @package yongtiger\ueditor
+ * @package yongtiger\ueditor\widgets
  */
 class UEditor extends InputWidget
 {
@@ -115,7 +116,7 @@ class UEditor extends InputWidget
                             var input = document.createElement('input');
                             input.name = '<?= $this->uploadInputNames['file'] ?>';
                             input.type = 'hidden';
-                            input.value = '{"url":"'+arguments[i].url+'","title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}';
+                            input.value = '{"url":"'+arguments[i].url+'", "original":"'+arguments[i].original+'", "title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}'; ///[v0.0.5 (FIX# original)]
                             ue.container.appendChild(input);
                         }
 
@@ -129,7 +130,7 @@ class UEditor extends InputWidget
                             var input = document.createElement('input');
                             input.name = '<?= $this->uploadInputNames['video'] ?>';
                             input.type = 'hidden';
-                            input.value = '{"url":"'+arguments[i].url+'","title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}';
+                            input.value = '{"url":"'+arguments[i].url+'", "original":"'+arguments[i].original+'", "title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}'; ///[v0.0.5 (FIX# original)]
                             ue.container.appendChild(input);
                         }
 

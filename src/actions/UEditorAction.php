@@ -10,17 +10,18 @@
  * @license     http://opensource.org/licenses/MIT
  */
 
-namespace yongtiger\ueditor;
+namespace yongtiger\ueditor\actions;
 
 use Yii;
 use yii\base\Action;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
+use yongtiger\ueditor\uploader;
 
 /**
  * Class UEditorAction
  *
- * @package yongtiger\ueditor
+ * @package yongtiger\ueditor\actions
  */
 class UEditorAction extends Action
 {

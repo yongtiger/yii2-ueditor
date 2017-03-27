@@ -555,10 +555,11 @@
                 data = this.fileList[i];
                 link = data.url;
                 list.push({
-                    title: data.original || link.substr(link.lastIndexOf('/') + 1),
-                    url: prefix + link,
 
-                    ///[UEditor_Event]
+                    ///[v0.0.5 (FIX# original)]
+                    original: data.original,
+                    title: data.title,
+                    url: prefix + link,
                     type: data.type,
                     size: data.size
                     

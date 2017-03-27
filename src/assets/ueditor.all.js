@@ -23814,8 +23814,8 @@ UE.plugin.register('autoupload', function (){
                     loader.removeAttribute('id');
                     domUtils.removeClasses(loader, 'loadingclass');
 
-                    ///[UEditor_Event]
-                    me.fireEvent('afterautouploadimage', {"src":link, "title":data.title || '', "alt":data.original || '', "type":data.type || '', "size":data.size});
+                    ///[v0.0.5 (FIX# original)]
+                    me.fireEvent('afterautouploadimage', {"src":link, "alt":data.original || '', "title":data.title || '', "type":data.type || '', "size":data.size});
 
                 }
             };
@@ -23835,7 +23835,8 @@ UE.plugin.register('autoupload', function (){
 
                 ///[UEditor_Event]
                 ///me.execCommand('insertfile', {'url': link});
-                me.execCommand('insertfile', {'url': link, 'title': data.original || '', 'type': data.type || '', 'size': data.size});
+                ///[v0.0.5 (FIX# original)]
+                me.execCommand('insertfile', {'url': link, 'original': data.original || '', 'title': data.title || '', 'type': data.type || '', 'size': data.size});
 
                 rng.moveToBookmark(bk).select();
             };
