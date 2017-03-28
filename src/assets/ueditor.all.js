@@ -29675,7 +29675,7 @@ function isExist(uploadvalue){
         ///遍历ue.document中所有img标签，如果所有img标签的_url都不包含uploadvideos[i].value的url，则删除该uploadvideos[i]
         for(var j=0;j<imgs.length;j++){
             ///[decodeURI is needed]
-            if(decodeURI(videos[j].getAttribute('_url')).indexOf(decodeURI(uploadvalue.url))>=0){
+            if(decodeURI(imgs[j].getAttribute('_url')).indexOf(decodeURI(uploadvalue.url))>=0){
                 return true;
             }
         }
