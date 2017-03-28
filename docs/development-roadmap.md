@@ -1,5 +1,11 @@
 # Development roadmap
 
+## v0.0.7 (FIX# collectionToArray)
+
+* `\assets\ueditor.all.js` (29685)
+* `\widgets\UEditor.php` (156)
+
+
 ## v0.0.6 (CHG# detachValues)
 
 * `\assets\ueditor.all.js` (29650)

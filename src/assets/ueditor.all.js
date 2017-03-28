@@ -29682,3 +29682,12 @@ function isExist(uploadvalue){
     }
     return false;
 }
+///[v0.0.7 (FIX# collectionToArray)]
+///@see http://www.5icool.org/a/201105/a605.html
+function collectionToArray(collection){ 
+    var ary = []; 
+    for(var i=0, len = collection.length; i < len; i++){ 
+        ary.push(collection[i]); 
+    } 
+    return ary; 
+}

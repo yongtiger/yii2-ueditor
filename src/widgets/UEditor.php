@@ -142,7 +142,7 @@ class UEditor extends InputWidget
                         var input = document.createElement('input');
                         input.name = '<?= $this->uploadInputNames['attachValues'] ?>';
                         input.type = 'hidden';
-                        input.value = '{"url":"'+arguments[i].src+'", "original":"'+arguments[i].alt+'", "title":"'+arguments[i].title+'", "suffix":"'+arguments[i].type+'", "type":"image", "size":'+arguments[i].size+'}';
+                        input.value = '{"url":"'+argument.src+'", "original":"'+argument.alt+'", "title":"'+argument.title+'", "suffix":"'+argument.type+'", "type":"image", "size":'+argument.size+'}';
                         ue.container.appendChild(input);
                     }
                 });
@@ -151,7 +151,10 @@ class UEditor extends InputWidget
                 ///[v0.0.6 (CHG# detachValues)]
                 ///检测body中是否含有附件项，如果没有则删除
                 ue.addListener('contentchange',function(){
-                    var attachValues = document.getElementsByName('<?= $this->uploadInputNames['attachValues'] ?>');
+                    ///[v0.0.7 (FIX# collectionToArray)]
+                    var attachValues = collectionToArray(document.getElementsByName('<?= $this->uploadInputNames['attachValues'] ?>'));
+                    var detachValues = collectionToArray(document.getElementsByName('<?= $this->uploadInputNames['detachValues'] ?>'));
+
                     ///遍历attachValues
                     for(var i=0;i<attachValues.length;i++){
                         var uploadvalue = JSON.parse(attachValues[i].value);
@@ -160,7 +163,6 @@ class UEditor extends InputWidget
                         }
                     }
 
-                    var detachValues = document.getElementsByName('<?= $this->uploadInputNames['detachValues'] ?>');
                     ///遍历detachValues
                     for(var i=0;i<detachValues.length;i++){
                         var uploadvalue = JSON.parse(detachValues[i].value);
