@@ -36,10 +36,10 @@ class UEditor extends InputWidget
     public $serverparam;
     
     ///[UEditor_Event_insertimage_insertfile_simpleuploadge]
+    ///[v0.0.6 (CHG# detachValues)]
     public $uploadInputNames = [
-        'image' => 'insertimage[]',
-        'file' => 'insertfile[]',
-        'video' => 'insertvideo[]',///[v0.0.3 (ADD# UEditor_insertvideo)]
+        'attachValues' => 'attachValues[]',
+        'detachValues' =>'detachValues[]',
     ];
 
     //默认配置
@@ -101,9 +101,9 @@ class UEditor extends InputWidget
                         ///arguments: 上传图片的对象数组（如果上传多张图片，可遍历该值）
                         for(var i=0;i<arguments.length;i++){
                             var input = document.createElement('input');
-                            input.name = '<?= $this->uploadInputNames['image'] ?>';
+                            input.name = '<?= $this->uploadInputNames['attachValues'] ?>';
                             input.type = 'hidden';
-                            input.value = '{"src":"'+arguments[i].src+'", "alt":"'+arguments[i].alt+'", "title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}';
+                            input.value = '{"url":"'+arguments[i].src+'", "original":"'+arguments[i].alt+'", "title":"'+arguments[i].title+'", "suffix":"'+arguments[i].type+'", "type":"image", "size":'+arguments[i].size+'}';
                             ue.container.appendChild(input);
                         }
 
@@ -114,9 +114,9 @@ class UEditor extends InputWidget
                         ///arguments: 上传文件的对象数组（如果上传多个文件，可遍历该值）
                         for(var i=0;i<arguments.length;i++){
                             var input = document.createElement('input');
-                            input.name = '<?= $this->uploadInputNames['file'] ?>';
+                            input.name = '<?= $this->uploadInputNames['attachValues'] ?>';
                             input.type = 'hidden';
-                            input.value = '{"url":"'+arguments[i].url+'", "original":"'+arguments[i].original+'", "title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}'; ///[v0.0.5 (FIX# original)]
+                            input.value = '{"url":"'+arguments[i].url+'", "original":"'+arguments[i].original+'", "title":"'+arguments[i].title+'", "suffix":"'+arguments[i].type+'", "type":"file", "size":'+arguments[i].size+'}'; ///[v0.0.5 (FIX# original)]
                             ue.container.appendChild(input);
                         }
 
@@ -128,9 +128,9 @@ class UEditor extends InputWidget
                         ///arguments: 上传视频的对象数组（如果上传多个视频，可遍历该值）
                         for(var i=0;i<arguments.length;i++){
                             var input = document.createElement('input');
-                            input.name = '<?= $this->uploadInputNames['video'] ?>';
+                            input.name = '<?= $this->uploadInputNames['attachValues'] ?>';
                             input.type = 'hidden';
-                            input.value = '{"url":"'+arguments[i].url+'", "original":"'+arguments[i].original+'", "title":"'+arguments[i].title+'", "type":"'+arguments[i].type+'", "size":'+arguments[i].size+'}'; ///[v0.0.5 (FIX# original)]
+                            input.value = '{"url":"'+arguments[i].url+'", "original":"'+arguments[i].original+'", "title":"'+arguments[i].title+'", "suffix":"'+arguments[i].type+'", "type":"video", "size":'+arguments[i].size+'}'; ///[v0.0.5 (FIX# original)]
                             ue.container.appendChild(input);
                         }
 
@@ -140,96 +140,46 @@ class UEditor extends InputWidget
                     if(type == 'aftersimpleupload' || type == 'afterautouploadimage' || type == 'afterwordimage' || type == 'aftercatchremote'){
                         ///argument: 上传图片的img对象，另外size为上传图片的文件大小
                         var input = document.createElement('input');
-                        input.name = '<?= $this->uploadInputNames['image'] ?>';
+                        input.name = '<?= $this->uploadInputNames['attachValues'] ?>';
                         input.type = 'hidden';
-                        input.value = '{"src":"'+argument.src+'", "alt":"'+argument.alt+'", "title":"'+argument.title+'", "type":"'+argument.type+'", "size":'+argument.size+'}';
+                        input.value = '{"url":"'+arguments[i].src+'", "original":"'+arguments[i].alt+'", "title":"'+arguments[i].title+'", "suffix":"'+arguments[i].type+'", "type":"image", "size":'+arguments[i].size+'}';
                         ue.container.appendChild(input);
                     }
                 });
                 ///[http://www.brainbook.cc]
 
+                ///[v0.0.6 (CHG# detachValues)]
                 ///检测body中是否含有附件项，如果没有则删除
                 ue.addListener('contentchange',function(){
-                    var uploadimages = document.getElementsByName('<?= $this->uploadInputNames['image'] ?>');
-                    if(uploadimages.length>0){
-                        var imgs = ue.document.getElementsByTagName('img');
-                        ///遍历uploadimages
-                        for(var i=0;i<uploadimages.length;i++){
-                            var is_exist = false;
-                            ///遍历ue.document中所有img标签，如果所有img标签的src都不包含uploadimages[i].value的src，则删除该uploadimages[i]
-                            for(var j=0;j<imgs.length;j++){
-                                ///[decodeURI is needed] because:
-                                ///imgs[j].src = `http://localhost/%5Bgit%5D/1_article/frontend/web/index.php?r=article%2Fpost%2Fupdate&id=67'
-                                ///JSON.parse(uploadimages[i].value).src = `/[git]/1_article/frontend/web/upload/scrawl/20170325/1490402665412466.png`
-                                $src1 = decodeURI(imgs[j].src); 
-                                $src2 = decodeURI(JSON.parse(uploadimages[i].value).src);   
-                                if($src1.indexOf($src2)>=0){
-                                    is_exist = true;
-                                    break;
-                                }
-                            }
-                            if(!is_exist){
-                                ue.container.removeChild(uploadimages[i]);
-                            }
+                    var attachValues = document.getElementsByName('<?= $this->uploadInputNames['attachValues'] ?>');
+                    ///遍历attachValues
+                    for(var i=0;i<attachValues.length;i++){
+                        var uploadvalue = JSON.parse(attachValues[i].value);
+                        if(!isExist(uploadvalue)){
+                            attachValues[i].name = '<?= $this->uploadInputNames['detachValues'] ?>';
                         }
                     }
-                    var uploadfiles = document.getElementsByName('<?= $this->uploadInputNames['file'] ?>');
-                    if(uploadfiles.length>0){
-                        var files = ue.document.getElementsByTagName('a');
-                        ///遍历uploadfiles
-                        for(var i=0;i<uploadfiles.length;i++){
-                            var is_exist = false;
-                            ///遍历ue.document中所有a标签，如果所有a标签的href都不包含uploadfiles[i].value的url，则删除该uploadfiles[i]
-                            for(var j=0;j<files.length;j++){
-                                ///[decodeURI is needed]
-                                $url1 = decodeURI(files[j].href);
-                                $url2 = decodeURI(JSON.parse(uploadfiles[i].value).url);
-                                if($url1.indexOf($url2)>=0){
-                                    is_exist = true;
-                                    break;
-                                }
-                            }
-                            if(!is_exist){
-                                ue.container.removeChild(uploadfiles[i]);
-                            }
-                        }
-                    }
-                    ///[v0.0.3 (ADD# UEditor_insertvideo)]
-                    var uploadvideos = document.getElementsByName('<?= $this->uploadInputNames['video'] ?>');
-                    if(uploadvideos.length>0){
-                        var videos = ue.document.getElementsByTagName('img');
-                        ///遍历uploadvideos
-                        for(var i=0;i<uploadvideos.length;i++){
-                            var is_exist = false;
-                            ///遍历ue.document中所有img标签，如果所有img标签的_url都不包含uploadvideos[i].value的url，则删除该uploadvideos[i]
-                            for(var j=0;j<videos.length;j++){
-                                ///[decodeURI is needed]
-                                $url1 = decodeURI(videos[j].getAttribute('_url'));
-                                $url2 = decodeURI(JSON.parse(uploadvideos[i].value).url);
-                                if($url1.indexOf($url2)>=0){
-                                    is_exist = true;
-                                    break;
-                                }
-                            }
-                            if(!is_exist){
-                                ue.container.removeChild(uploadvideos[i]);
-                            }
+
+                    var detachValues = document.getElementsByName('<?= $this->uploadInputNames['detachValues'] ?>');
+                    ///遍历detachValues
+                    for(var i=0;i<detachValues.length;i++){
+                        var uploadvalue = JSON.parse(detachValues[i].value);
+                        if(isExist(uploadvalue)){
+                            detachValues[i].name = '<?= $this->uploadInputNames['attachValues'] ?>';
                         }
                     }
                 });
-                ///[http://www.brainbook.cc]
 
                 ///[yii2-brainblog_v0.9.1_f0.9.0_post_attachment_AttachableBehavior]
                 <?php foreach ($this->model->attachValues as $key => $value) : ?>
                     <?php foreach ($value as $uploadJson) : ?>
                         var input = document.createElement('input');
-                        input.name = 'Content[attachValues][<?= $key ?>][]';
+                        input.name = '<?= $this->uploadInputNames['attachValues'] ?>';
                         input.type = 'hidden';
                         input.value = '<?= $uploadJson ?>';
                         ue.container.appendChild(input);
                     <?php endforeach; ?>
                 <?php endforeach; ?>
-                ///[http://www.brainbook.cc]
 
             });
 

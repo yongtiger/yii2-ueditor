@@ -1,5 +1,11 @@
 # Development roadmap
 
+## v0.0.6 (CHG# detachValues)
+
+* `\assets\ueditor.all.js` (29650)
+* `\widgets\UEditor.php`
+
+
 ## v0.0.5 (Reconstruction and FIX# original)
 
 * `\assets\dialogs\attachment\attachment.js` (559)

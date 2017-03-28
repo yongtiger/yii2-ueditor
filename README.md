@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.0.5 (Reconstruction and FIX# original)
+# Yii2-ueditor v0.0.6 (CHG# detachValues)
 
 Forks from [BigKuCha/yii2-ueditor-widget](https://github.com/BigKuCha/yii2-ueditor-widget) version 1.21.
 
