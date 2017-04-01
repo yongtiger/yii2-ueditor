@@ -1,4 +1,5 @@
 /*!
+ * ///[v0.0.9 (CHG# UE with PARSER to avoid conflict when using UEditor and ueditor.parse.js together)]
  * UEditor
  * version: ueditor
  * build: Wed Aug 10 2016 11:06:03 GMT+0800 (CST)
@@ -7,11 +8,11 @@
 (function(){
 
 (function(){
-    UE = window.UE || {};
+    PARSER = window.PARSER || {};
     var isIE = !!window.ActiveXObject;
 
     ///[Syntaxhighlighter]语法高亮设置,一共有8种主题可选：Default,Django,Eclipse,Emacs,FadeToGrey,MDUltra,Midnight,RDark
-    UE.sh_config = {
+    PARSER.sh_config = {
         sh_js : "shCore.min.js",
         sh_theme : "Default"
     };
@@ -305,7 +306,7 @@
         }
     });
     var parselist = {};
-    UE.parse = {
+    PARSER.parse = {
         register : function(parseName,fn){
             parselist[parseName] = fn;
         },
@@ -335,13 +336,13 @@
                 }
             }
             utils.each(contents,function(v){
-                UE.parse.load(utils.extend({root:v,selector:selector},opt))
+                PARSER.parse.load(utils.extend({root:v,selector:selector},opt))
             })
         })
     }
 })();
 
-UE.parse.register('insertcode',function(utils){
+PARSER.parse.register('insertcode',function(utils){
     var pres = this.root.getElementsByTagName('pre');
     if(pres.length){
         if(typeof XRegExp == "undefined"){
@@ -350,8 +351,8 @@ UE.parse.register('insertcode',function(utils){
                 ///[Syntaxhighlighter]语法高亮设置
                 ///jsurl = utils.removeLastbs(this.rootPath)  + '/third-party/SyntaxHighlighter/shCore.js';
                 ///cssurl = utils.removeLastbs(this.rootPath) + '/third-party/SyntaxHighlighter/shCoreDefault.css';
-                jsurl = utils.removeLastbs(this.rootPath)  + '/third-party/SyntaxHighlighter/'+UE.sh_config.sh_js;
-                cssurl = utils.removeLastbs(this.rootPath) + '/third-party/SyntaxHighlighter/shCore'+UE.sh_config.sh_theme+'.css';
+                jsurl = utils.removeLastbs(this.rootPath)  + '/third-party/SyntaxHighlighter/'+PARSER.sh_config.sh_js;
+                cssurl = utils.removeLastbs(this.rootPath) + '/third-party/SyntaxHighlighter/shCore'+PARSER.sh_config.sh_theme+'.css';
                 
             }else{
                 jsurl = this.highlightJsUrl;
@@ -387,7 +388,7 @@ UE.parse.register('insertcode',function(utils){
     }
 
 });
-UE.parse.register('table', function (utils) {
+PARSER.parse.register('table', function (utils) {
     var me = this,
         root = this.root,
         tables = root.getElementsByTagName('table');
@@ -548,7 +549,7 @@ UE.parse.register('table', function (utils) {
         }
     }
 });
-UE.parse.register('charts',function( utils ){
+PARSER.parse.register('charts',function( utils ){
 
     utils.cssRule('chartsContainerHeight','.edui-chart-container { height:'+(this.chartContainerHeight||300)+'px}');
     var resourceRoot = this.rootPath,
@@ -885,7 +886,7 @@ UE.parse.register('charts',function( utils ){
     }
 
 });
-UE.parse.register('background', function (utils) {
+PARSER.parse.register('background', function (utils) {
     var me = this,
         root = me.root,
         p = root.getElementsByTagName('p'),
@@ -901,7 +902,7 @@ UE.parse.register('background', function (utils) {
     //追加默认的表格样式
     styles && utils.cssRule('ueditor_background', me.selector + '{' + styles + '}', document);
 });
-UE.parse.register('list',function(utils){
+PARSER.parse.register('list',function(utils){
     var customCss = [],
         customStyle = {
             'cn'    :   'cn-1-',
@@ -995,7 +996,7 @@ UE.parse.register('list',function(utils){
 
 
 });
-UE.parse.register('vedio',function(utils){
+PARSER.parse.register('vedio',function(utils){
     var video = this.root.getElementsByTagName('video'),
         audio = this.root.getElementsByTagName('audio');
 

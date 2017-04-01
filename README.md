@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.0.8 (TYPO# UeditorParseAsset)
+# Yii2-ueditor v0.0.9 (CHG# UE with PARSER to avoid conflict when using UEditor and ueditor.parse.js together)
 
 Forks from [BigKuCha/yii2-ueditor-widget](https://github.com/BigKuCha/yii2-ueditor-widget) version 1.21 and fixes a lot.
 

@@ -1,8 +1,13 @@
 # Development roadmap
 
+## v0.0.9 (CHG# UE with PARSER to avoid conflict when using UEditor and ueditor.parse.js together)
+
+* `ueditor.parse.js` and `ueditor.parse.min.js`
+
+
 ## v0.0.8 (TYPO# UeditorParseAsset)
 
-* `\UeditorParseAsset.php'
+* `\UeditorParseAsset.php`
 
 
 ## v0.0.7 (FIX# collectionToArray)
