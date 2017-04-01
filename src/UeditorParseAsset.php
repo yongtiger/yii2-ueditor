@@ -18,7 +18,7 @@ class UeditorParseAsset extends AssetBundle
 {
     public $js = [
     	'ueditor.parse.js',	///for test
-        'ueditor.parse.min.js',
+        // 'ueditor.parse.min.js',
     ];
    
     public function init()

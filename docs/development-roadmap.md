@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.8 (TYPO# UeditorParseAsset)
+
+* `\UeditorParseAsset.php'
+
+
 ## v0.0.7 (FIX# collectionToArray)
 
 * `\assets\ueditor.all.js` (29685)
