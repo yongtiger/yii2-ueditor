@@ -1,8 +1,12 @@
 # Development roadmap
 
-## v0.0.9 (CHG# UE with PARSER to avoid conflict when using UEditor and ueditor.parse.js together)
+## v0.0.999 (attachable using js)
 
-* `ueditor.parse.js` and `ueditor.parse.min.js`
+
+## v0.0.10 (ADD# AttachableTrait)
+
+* `\traits\AttachabeTrait.php`
+* `\widgets\UEditor.php` (31)
 
 
 ## v0.0.8 (TYPO# UeditorParseAsset)

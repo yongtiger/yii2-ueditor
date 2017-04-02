@@ -35,6 +35,7 @@ class UEditorAction extends Action
     {
         //close csrf
         Yii::$app->request->enableCsrfValidation = false;
+        
         //默认设置
         $_config = require(__DIR__ . '/config.php');
 
@@ -51,7 +52,7 @@ class UEditorAction extends Action
 
     public function run()
     {
-        if (Yii::$app->request->get('callback',false)) {
+        if (Yii::$app->request->get('callback', false)) {
             Yii::$app->response->format = Response::FORMAT_JSONP;
         } else {
             Yii::$app->response->format = Response::FORMAT_JSON;
