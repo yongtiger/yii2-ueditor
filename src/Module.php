@@ -29,7 +29,7 @@ class Module extends \yii\base\Module
     /**
      * @var array
      */
-    public $config = [];
+    public $actionConfig = [];  ///[v0.1.1 (CHG# module actionConfig)]
 
     /**
      * @inheritdoc
@@ -37,9 +37,11 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+
+        ///[v0.1.1 (CHG# module actionConfig)]
         ///Enable use `@webroot` e.g. `'imageRoot' => '@webroot'`
-        if (!empty($this->config['imageRoot'])) {
-            $this->config['imageRoot'] = Yii::getAlias($this->config['imageRoot']);
+        if (!empty($this->actionConfig['imageRoot'])) {
+            $this->actionConfig['imageRoot'] = Yii::getAlias($this->actionConfig['imageRoot']);
         }
     }
 

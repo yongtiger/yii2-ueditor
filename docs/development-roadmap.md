@@ -1,5 +1,11 @@
 # Development roadmap
 
+## v0.1.1 (CHG# module actionConfig)
+
+* `\Module.php` (32-45)
+* `\controllers\DefaultController.php` (455)
+
+
 ## v0.1.0 (reconstruct and FIX# display error message in comment)
 
 * `\widgets\UEditor.php` (91): `var ue=UE.getEditor('<?= $this->options['id'] ?>', <?= $clientOptions ?>);`

@@ -21,7 +21,7 @@ class DefaultController extends Controller
         return [
             'upload' => [
                 'class' => 'yongtiger\ueditor\actions\UEditorAction',
-                'config' => Module::instance()->config,
+                'config' => Module::instance()->actionConfig, ///[v0.1.1 (CHG# module actionConfig)]
             ]
         ];
     }
