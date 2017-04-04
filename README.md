@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.1.0 (FIX# display error message in comment)
+# Yii2-ueditor v0.1.0 (reconstruct and FIX# display error message in comment)
 
 Forks from [BigKuCha/yii2-ueditor-widget](https://github.com/BigKuCha/yii2-ueditor-widget) version 1.21 and fixes a lot.
 
