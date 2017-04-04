@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.1.1 (CHG# module actionConfig)
+# Yii2-ueditor v0.1.2 (CHG# module widgetOptions,
 
 Forks from [BigKuCha/yii2-ueditor-widget](https://github.com/BigKuCha/yii2-ueditor-widget) version 1.21 and fixes a lot.
 

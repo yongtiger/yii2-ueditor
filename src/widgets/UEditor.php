@@ -21,6 +21,7 @@ use yii\web\View;
 use yii\widgets\InputWidget;
 use yongtiger\ueditor\UEditorAsset;
 use yongtiger\ueditor\traits\AttachableTrait;
+use yongtiger\ueditor\Module;
 
 /**
  * UEditor Input Widget
@@ -49,8 +50,12 @@ class UEditor extends InputWidget
     {
         parent::init();
 
+        ///[v0.1.2 (CHG# module widgetOptions, widgetClientOptions)]
+        $this->options = ArrayHelper::merge(Module::instance()->widgetOptions, $this->options);
+        $this->clientOptions = ArrayHelper::merge(Module::instance()->widgetClientOptions, $this->clientOptions);
+
         $this->clientOptions = ArrayHelper::merge([
-            'serverUrl' => Url::to(['/ueditor/default/upload']),
+            'serverUrl' => Url::to(['/ueditor/default/upload']),    ///?????是否可选择远程上传服务`http://domain/path/upload.php`
             'initialFrameWidth' => '100%',
             'initialFrameHeight' => '400',
             'lang' => (strtolower(Yii::$app->language) == 'en-us') ? 'en' : 'zh-cn',

@@ -30,6 +30,8 @@ class Module extends \yii\base\Module
      * @var array
      */
     public $actionConfig = [];  ///[v0.1.1 (CHG# module actionConfig)]
+    public $widgetOptions = [];   ///[v0.1.2 (CHG# module widgetOptions, widgetClientOptions)]
+    public $widgetClientOptions = []; ///[v0.1.2 (CHG# module widgetOptions, widgetClientOptions)]
 
     /**
      * @inheritdoc

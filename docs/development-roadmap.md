@@ -1,5 +1,11 @@
 # Development roadmap
 
+## v0.1.2 (CHG# module widgetOptions, widgetClientOptions)
+
+* `\Module.php` (33)
+* `\widgets\UEditor.php` (53)
+
+
 ## v0.1.1 (CHG# module actionConfig)
 
 * `\Module.php` (32-45)
