@@ -21,6 +21,48 @@ use yongtiger\ueditor\uploader;
 /**
  * Class UEditorAction
  *
+ * Using upload actions in your own controller:
+ *
+ * ```php
+ * class DefaultController extends Controller
+ * {
+ *     public function actions()
+ *     {
+ *         return [
+ *             'upload' => [
+ *                 'class' => 'yongtiger\ueditor\actions\UEditorAction',
+ *                 ///@see \vendor\yongtiger\yii2-ueditor\src\actions\config.php
+ *                 'config' => [
+ *                     "imageUrlPrefix"  => "http://www.brainbook.cc",//图片访问路径前缀
+ *                     "imagePathFormat" => "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
+ *                     "imageRoot" => Yii::getAlias("@webroot"),
+ *                 ],
+ *             ]
+ *         ];
+ *     }
+ * }
+ *
+ * ```
+ *
+ * Using upload actions through `yongtiger\ueditor\module` and `yongtiger\ueditor\controllers`:
+ *
+ * Add to config file (config/web.php or common\config\main.php):
+ *
+ * ```php
+ * 'modules' => [
+ *     'ueditor' => [
+ *         'class' => 'yongtiger\ueditor\Module',
+ *         ///@see \vendor\yongtiger\yii2-ueditor\src\actions\config.php
+ *         'config' => [
+ *              "imageRoot" => '@webroot', ///Note: Cannot use `Yii::getAlias("@webroot")` in application config!
+ *              "imageUrlPrefix"  => "http://www.brainbook.cc",//图片访问路径前缀
+ *              "imagePathFormat" => "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
+ *         ],
+ *     ],
+ *     // ...
+ * ]
+ * ```
+ *
  * @package yongtiger\ueditor\actions
  */
 class UEditorAction extends Action
@@ -30,7 +72,9 @@ class UEditorAction extends Action
      */
     public $config = [];
 
-
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         //close csrf
@@ -61,7 +105,7 @@ class UEditorAction extends Action
     }
 
     /**
-     * 处理action
+     * Handle action
      */
     protected function handleAction()
     {
@@ -111,7 +155,7 @@ class UEditorAction extends Action
     }
 
     /**
-     * 上传
+     * Action upload
      * @return array
      */
     protected function actionUpload()
@@ -121,11 +165,7 @@ class UEditorAction extends Action
             case 'uploadimage':
                 $config = array(
                     "pathRoot" => ArrayHelper::getValue($this->config, "imageRoot", $_SERVER['DOCUMENT_ROOT']),
-
-                    ///[yii2-brainblog_v0.9.0_f0.8.0_UEditor_SyntaxHighlighter][UEditor:自定义请求参数]
-                    ///"pathFormat" => $this->config['imagePathFormat'],
-                    "pathFormat" => isset($_GET['imagePathFormat']) ? $_GET['imagePathFormat'] : $this->config['imagePathFormat'],
-
+                    "pathFormat" => $this->config['imagePathFormat'],
                     "maxSize" => $this->config['imageMaxSize'],
                     "allowFiles" => $this->config['imageAllowFiles']
                 );
@@ -134,11 +174,7 @@ class UEditorAction extends Action
             case 'uploadscrawl':
                 $config = array(
                     "pathRoot" => ArrayHelper::getValue($this->config, "scrawlRoot", $_SERVER['DOCUMENT_ROOT']),
-
-                    ///[yii2-brainblog_v0.9.0_f0.8.0_UEditor_SyntaxHighlighter][UEditor:自定义请求参数]
-                    ///"pathFormat" => $this->config['scrawlPathFormat'],
-                    "pathFormat" => isset($_GET['scrawlPathFormat']) ? $_GET['scrawlPathFormat'] : $this->config['scrawlPathFormat'],
-
+                    "pathFormat" => $this->config['scrawlPathFormat'],
                     "maxSize" => $this->config['scrawlMaxSize'],
                     "allowFiles" => $this->config['scrawlAllowFiles'],
                     "oriName" => "scrawl.png"
@@ -149,12 +185,7 @@ class UEditorAction extends Action
             case 'uploadvideo':
                 $config = array(
                     "pathRoot" => ArrayHelper::getValue($this->config, "videoRoot", $_SERVER['DOCUMENT_ROOT']),
-
-                    ///[yii2-brainblog_v0.9.0_f0.8.0_UEditor_SyntaxHighlighter][UEditor:自定义请求参数]
-                    ///"pathFormat" => $this->config['videoPathFormat'],
-                    "pathFormat" => isset($_GET['videoPathFormat']) ? $_GET['videoPathFormat'] : $this->config['videoPathFormat'],
-
-
+                    "pathFormat" => $this->config['videoPathFormat'],
                     "maxSize" => $this->config['videoMaxSize'],
                     "allowFiles" => $this->config['videoAllowFiles']
                 );
@@ -164,12 +195,7 @@ class UEditorAction extends Action
             default:
                 $config = array(
                     "pathRoot" => ArrayHelper::getValue($this->config, "fileRoot", $_SERVER['DOCUMENT_ROOT']),
-                    
-                    ///[yii2-brainblog_v0.9.0_f0.8.0_UEditor_SyntaxHighlighter][UEditor:自定义请求参数]
-                    ///"pathFormat" => $this->config['filePathFormat'],
-                    "pathFormat" => isset($_GET['filePathFormat']) ? $_GET['filePathFormat'] : $this->config['filePathFormat'],
-
-
+                    "pathFormat" => $this->config['filePathFormat'],
                     "maxSize" => $this->config['fileMaxSize'],
                     "allowFiles" => $this->config['fileAllowFiles']
                 );

@@ -35,6 +35,7 @@ class UEditor extends InputWidget
     }
 
     //配置选项，会覆盖ueditor.config.js，参阅Ueditor官网文档(定制菜单等)
+    ///@see http://fex.baidu.com/ueditor/#start-toolbar
     public $clientOptions = [];
 
     ///[UEditor:自定义请求参数]@see http://fex.baidu.com/ueditor/#dev-serverparam
@@ -46,13 +47,6 @@ class UEditor extends InputWidget
      */
     public function init()
     {
-        if (isset($this->options['id'])) {
-            $this->id = $this->options['id'];
-        } else {
-            $this->id = $this->hasModel() ? Html::getInputId($this->model,
-                $this->attribute) : $this->id;
-        }
-
         parent::init();
 
         $this->clientOptions = ArrayHelper::merge([
@@ -67,17 +61,20 @@ class UEditor extends InputWidget
         $this->__initTrait();   ///[v0.0.10 (ADD# AttachableTrait)]@see http://stackoverflow.com/questions/12478124/how-to-overload-class-constructor-within-traits-in-php-5-4
     }
 
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
         if ($this->hasModel()) {
-            return Html::activeTextarea($this->model, $this->attribute, ['id' => $this->id]);
+            return Html::activeTextarea($this->model, $this->attribute, $this->options);
         } else {
-            return Html::textarea($this->id, $this->value, ['id' => $this->id]);
+            return Html::textarea($this->name, $this->value, $this->options);
         }
     }
 
     /**
-     * 注册客户端脚本
+     * Registers client script
      */
     protected function registerClientScript()
     {
@@ -91,10 +88,13 @@ class UEditor extends InputWidget
 
         $this->view->beginBlock("client_script") ?>
         ///<script type="text/javascript"> ///欺骗sublime文本编辑器，使下面代码显示JS语法高亮
-            var ue=UE.getEditor('<?= $this->id ?>', <?= $clientOptions ?>);
+            ///[v0.1.0 (FIX# display error message in comment)]@see http://www.yiiframework.com/doc-2.0/yii-widgets-activefield.html#$selectors-detail
+            var ue=UE.getEditor('<?= $this->options['id'] ?>', <?= $clientOptions ?>);
+
             ue.ready(function() {
                 ue.execCommand('serverparam', <?= $serverparam ?>);
             });
+            
         <?php $this->view->endBlock();
 
         $this->view->registerJs($this->view->blocks["client_script"], View::POS_END);    

@@ -1,5 +1,23 @@
 # Development roadmap
 
+## v0.1.0 (FIX# display error message in comment)
+
+* `\widgets\UEditor.php` (91): `var ue=UE.getEditor('<?= $this->options['id'] ?>', <?= $clientOptions ?>);`
+
+* Usage:
+
+```php
+'editorCallback' => function($field, $model, $attribute, $name = null, $params = []) {
+
+    $field->selectors = ['input' => 'textarea'];	///@see http://www.yiiframework.com/doc-2.0/yii-widgets-activefield.html#$selectors-detail
+
+    return $field->widget('yongtiger\ueditor\widgets\UEditor', [
+
+        'clientOptions' => [
+        // ...
+```
+
+
 ## v0.0.999 (attachable using js)
 
 

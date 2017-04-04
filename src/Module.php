@@ -29,7 +29,7 @@ class Module extends \yii\base\Module
     /**
      * @var array
      */
-    public $config;
+    public $config = [];
 
     /**
      * @inheritdoc
@@ -37,6 +37,10 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+        ///Enable use `@webroot` e.g. `'imageRoot' => '@webroot'`
+        if (!empty($this->config['imageRoot'])) {
+            $this->config['imageRoot'] = Yii::getAlias($this->config['imageRoot']);
+        }
     }
 
     /**
