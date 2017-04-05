@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.1.3 (CHG# remove AttachableTrait)
+
+
 ## v0.1.2 (CHG# module widgetOptions, widgetClientOptions)
 
 * `\Module.php` (33)

@@ -20,7 +20,6 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\InputWidget;
 use yongtiger\ueditor\UEditorAsset;
-use yongtiger\ueditor\traits\AttachableTrait;
 use yongtiger\ueditor\Module;
 
 /**
@@ -30,11 +29,6 @@ use yongtiger\ueditor\Module;
  */
 class UEditor extends InputWidget
 {
-    ///[v0.0.10 (ADD# AttachableTrait)]@see http://stackoverflow.com/questions/12478124/how-to-overload-class-constructor-within-traits-in-php-5-4
-    use AttachableTrait {
-        AttachableTrait::init as private __initTrait;
-    }
-
     //配置选项，会覆盖ueditor.config.js，参阅Ueditor官网文档(定制菜单等)
     ///@see http://fex.baidu.com/ueditor/#start-toolbar
     public $clientOptions = [];
@@ -62,8 +56,6 @@ class UEditor extends InputWidget
         ] , $this->clientOptions);
 
         $this->registerClientScript();
-
-        $this->__initTrait();   ///[v0.0.10 (ADD# AttachableTrait)]@see http://stackoverflow.com/questions/12478124/how-to-overload-class-constructor-within-traits-in-php-5-4
     }
 
     /**
