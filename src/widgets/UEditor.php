@@ -49,11 +49,13 @@ class UEditor extends InputWidget
         $this->clientOptions = ArrayHelper::merge(Module::instance()->widgetClientOptions, $this->clientOptions);
 
         $this->clientOptions = ArrayHelper::merge([
-            'serverUrl' => Url::to(['/ueditor/default/upload']),    ///?????是否可选择远程上传服务`http://domain/path/upload.php`
+            'serverUrl' => new \yii\helpers\ReplaceArrayValue(['/ueditor/default/upload']),    ///?????是否可选择远程上传服务`http://domain/path/upload.php`
             'initialFrameWidth' => '100%',
             'initialFrameHeight' => '400',
             'lang' => (strtolower(Yii::$app->language) == 'en-us') ? 'en' : 'zh-cn',
         ] , $this->clientOptions);
+
+        $this->clientOptions['serverUrl'] = Url::to($this->clientOptions['serverUrl']);
 
         $this->registerClientScript();
     }
