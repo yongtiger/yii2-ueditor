@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.1.5 (CHG# module:widgetClientOptions)
+
+* `\Module.php`
+
+
 ## v0.1.4 (FIX# yii\helpers\ReplaceArrayValue)
 
 * `\widgets\UEditor.php` (552)

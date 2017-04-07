@@ -1,4 +1,4 @@
-# Yii2-ueditor v0.1.4 (FIX# yii\helpers\ReplaceArrayValue)
+# Yii2-ueditor v0.1.5 (CHG# module:widgetClientOptions)
 
 Forks from [BigKuCha/yii2-ueditor-widget](https://github.com/BigKuCha/yii2-ueditor-widget) version 1.21 and fixes a lot.
 
